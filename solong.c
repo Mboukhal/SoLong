@@ -6,7 +6,7 @@
 /*   By: mboukhal <mboukhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 13:32:00 by mboukhal          #+#    #+#             */
-/*   Updated: 2022/03/22 20:51:44 by mboukhal         ###   ########.fr       */
+/*   Updated: 2022/03/23 18:40:30 by mboukhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,15 @@ static void	check_lines(int iter, int fd)
 	if (iter > 1850)
 	{
 		close(fd);
-		ft_putstr_fd("ERROR\n\t\033[0;31mMap to lang more then (31) element :(\033[0m\n", STDERR_FILENO);
+		ft_putstr_fd("ERROR\n\t\033[0;31mMap to lang", STDERR_FILENO);
+		ft_putstr_fd("more then (31) element :(\033[0m\n", STDERR_FILENO);
 		exit(EXIT_FAILURE);
 	}
 }
 
 void	read_all_check_size(int fd, char *tmp, int *iter, char *file)
 {
-	int size;
+	int	size;
 	int	i;
 
 	i = 0;
@@ -42,7 +43,8 @@ void	read_all_check_size(int fd, char *tmp, int *iter, char *file)
 			if ((*iter) > 57)
 			{
 				close(fd);
-				ft_putstr_fd("ERROR\n\t\033[0;31mMap to lang more then (57) element :(\033[0m\n", STDERR_FILENO);
+				ft_putstr_fd("ERROR\n\t\033[0;31mMap to lang ", STDERR_FILENO);
+				ft_putstr_fd("more then (57) element :(\033[0m\n", STDERR_FILENO);
 				exit(EXIT_FAILURE);
 			}
 		}
@@ -65,9 +67,15 @@ char	*gfile(int fd, char *file)
 
 	iter = 0;
 	read_all_check_size(fd, tmp, &iter, file);
+	if (iter <= 1 || iter < 19)
+	{
+		printf("ok\n");
+		ft_putstr_fd("ERROR\n\t\033[0;31mNon valide map :(\033[0m\n", STDERR_FILENO);
+		exit (EXIT_FAILURE);
+	}
 	str = malloc(sizeof(char) * iter);
 	if (!str)
-		return(NULL);
+		return (NULL);
 	size = 0;
 	while (size < iter)
 	{
@@ -86,7 +94,8 @@ static void	check_exteniton(char *file)
 	iter = 0;
 	while (file[iter])
 	{
-		if ((file[iter] == '.' && file[iter + 4] == '\0') || file[iter + 1] == '\0')
+		if ((file[iter] == '.' && file[iter + 4] == '\0')
+			|| file[iter + 1] == '\0')
 		{
 			if (ft_strncmp(&file[iter], ".ber", 4) || file[iter + 1] == '\0')
 			{

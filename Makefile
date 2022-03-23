@@ -6,7 +6,7 @@
 #    By: mboukhal <mboukhal@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/04 21:39:40 by mboukhal          #+#    #+#              #
-#    Updated: 2022/03/23 16:13:33 by mboukhal         ###   ########.fr        #
+#    Updated: 2022/03/23 18:18:50 by mboukhal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,6 +57,9 @@ test3: re clean
 
 test1: re clean
 	@./$(NAME) map1.ber
+
+test_minim: re clean
+	@./$(NAME) map_mini.ber
 	
 all: $(NAME) clean
 

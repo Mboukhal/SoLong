@@ -6,13 +6,13 @@
 /*   By: mboukhal <mboukhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 14:40:23 by mboukhal          #+#    #+#             */
-/*   Updated: 2022/03/23 16:40:38 by mboukhal         ###   ########.fr       */
+/*   Updated: 2022/03/23 18:25:38 by mboukhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "solong.h"
 
-void	exit_game(t_comp *comp)
+int	exit_game(t_comp *comp)
 {
 	int	iter;
 
@@ -30,11 +30,19 @@ void	exit_game(t_comp *comp)
 	mlx_destroy_window(comp->mlx, comp->win);
 	free(comp->map);
 	exit(EXIT_SUCCESS);
+	return (EXIT_SUCCESS);
 }
 
 						/* key controle {01} */
 int	deal_key(int key, t_comp *comp)
 {
+	if (key == UP_KEY || key == DOWN_KEY || key == LEFT_KEY || key == RIGHT_KEY)
+	{
+		comp->move++;
+		ft_putstr_fd("\033[0;32mMove number = ", STDOUT_FILENO);
+		ft_putnbr_fd(comp->move, STDOUT_FILENO);
+		ft_putstr_fd("\033[0m\n", STDOUT_FILENO);
+	}
 	if (key == 53)
 		exit_game(comp);
 	if (key == UP_KEY)
@@ -45,8 +53,5 @@ int	deal_key(int key, t_comp *comp)
 		key_left(comp);
 	if (key == RIGHT_KEY)
 		key_right(comp);
-	if (key == 0xFF1B)
-		printf("OK  %d\n", key);
-	printf("fish = %d \n", comp->count_fish);
 	return (EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: mboukhal <mboukhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 14:51:13 by mboukhal          #+#    #+#             */
-/*   Updated: 2022/03/23 16:30:57 by mboukhal         ###   ########.fr       */
+/*   Updated: 2022/03/23 18:08:16 by mboukhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,16 +54,17 @@ typedef struct components
 	int		pp_line[2];
 	int		pp_index[2];
 	int		map_size[2];
+	int		move;
 	char	**map;
 }		t_comp;
 
 void	checks_and_start(char *map);
-void    main_game(t_comp *comp, char *map, int *size);
+void	main_game(t_comp *comp, char *map);
 int		deal_key(int key, t_comp *comp);
 void	key_right(t_comp *comp);
 void	key_left(t_comp *comp);
 void	key_up(t_comp *comp);
 void	key_down(t_comp *comp);
-void	exit_game(t_comp *comp);
+int		exit_game(t_comp *comp);
 
 #endif /* SOLONG_H */

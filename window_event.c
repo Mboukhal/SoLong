@@ -6,7 +6,7 @@
 /*   By: mboukhal <mboukhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 14:40:23 by mboukhal          #+#    #+#             */
-/*   Updated: 2022/03/23 18:25:38 by mboukhal         ###   ########.fr       */
+/*   Updated: 2022/03/23 19:01:58 by mboukhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,6 @@ int	exit_game(t_comp *comp)
 						/* key controle {01} */
 int	deal_key(int key, t_comp *comp)
 {
-	if (key == UP_KEY || key == DOWN_KEY || key == LEFT_KEY || key == RIGHT_KEY)
-	{
-		comp->move++;
-		ft_putstr_fd("\033[0;32mMove number = ", STDOUT_FILENO);
-		ft_putnbr_fd(comp->move, STDOUT_FILENO);
-		ft_putstr_fd("\033[0m\n", STDOUT_FILENO);
-	}
 	if (key == 53)
 		exit_game(comp);
 	if (key == UP_KEY)

@@ -6,7 +6,7 @@
 #    By: mboukhal <mboukhal@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/04 21:39:40 by mboukhal          #+#    #+#              #
-#    Updated: 2022/03/23 18:18:50 by mboukhal         ###   ########.fr        #
+#    Updated: 2022/03/23 19:00:43 by mboukhal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,43 +25,43 @@ LIB_EXT_MAKE 		= make $@ -C $(LIBFT_PHAT)
 
 OBJ			= $(CFILES:.c=.o) 
 clean:
-	@$(RM) $(OBJ) 
-	@# $(LIB_EXT_MAKE)
+	$(RM) $(OBJ) 
+	$(LIB_EXT_MAKE)
 
 fclean: clean
-	@$(RM) $(NAME)
-	@# $(LIB_EXT_MAKE)
+	$(RM) $(NAME)
+	$(LIB_EXT_MAKE)
 	
 
 re: fclean all
 
 .c.o:
-	@$(CC) $(CFLAGS) -c $<
+	$(CC) $(CFLAGS) -c $<
 
 
 $(NAME):$(OBJ)
-	@# make -C $(LIBFT_PHAT)
-	@$(CC) $(CFLAGS) -o $@ $(OBJ) $(LIBFT_PHAT)*.o $(INCLUDES) 
+	make -C $(LIBFT_PHAT)
+	$(CC) $(CFLAGS) -o $@ $(OBJ) $(LIBFT_PHAT)*.o $(INCLUDES) 
+
+test_big: re clean
+	@echo "test big map"
+	@./$(NAME) m.ber
 
 test2: re clean
-	@echo "done \n"
-	@./$(NAME) m.ber
-	make fclean 
-	# clear
-
-test3: re clean
-	@echo "done \n"
+	@echo "test map2 \n"
 	@./$(NAME) map2.ber
-	make fclean 
-	# clear
 
 test1: re clean
+	@echo "test map1 \n"
 	@./$(NAME) map1.ber
 
 test_minim: re clean
+	@echo "test extantion\n"
 	@./$(NAME) map_mini.ber
-	
-all: $(NAME) clean
 
+test_extention: re clean
+	./$(NAME) Makefile
+	
+all: $(NAME)
 
 .PHONY: re fclean all clean run

@@ -6,7 +6,7 @@
 /*   By: mboukhal <mboukhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 14:45:17 by mboukhal          #+#    #+#             */
-/*   Updated: 2022/03/23 18:24:40 by mboukhal         ###   ########.fr       */
+/*   Updated: 2022/03/23 18:56:50 by mboukhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,6 @@ static void	check_wall(char *map)
 	{
 		if (map[last_char++] == '\n')
 		{
-			// if (((last_char % iter) - 1) != i++)
-			// 	clean_exit("Something not cool happened in you map :(", map);
 			if (!(map[last_char - 2] == '1' && map[last_char] == '1'))
 				clean_exit("Wall has hol in vertical sides :(", map);
 		}

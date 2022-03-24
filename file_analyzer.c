@@ -6,7 +6,7 @@
 /*   By: mboukhal <mboukhal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 14:45:17 by mboukhal          #+#    #+#             */
-/*   Updated: 2022/03/23 18:56:50 by mboukhal         ###   ########.fr       */
+/*   Updated: 2022/03/24 14:37:25 by mboukhal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,10 @@ static void	check_component(t_comp *comp, char *map)
 		clean_exit("Map hase no fish :(", map);
 }
 
-static void	check_wall(char *map)
+static void	check_wall(char *map, t_comp *comp)
 {
 	int	iter;
-	int	i;
+	int	len;
 	int	last_char;
 
 	iter = 0;
@@ -71,18 +71,20 @@ static void	check_wall(char *map)
 		if (map[iter++] != '1')
 			clean_exit("Wall has hol :(", map);
 	last_char = 0;
-	i = 0;
+	len = 0;
 	while (map[last_char])
 	{
-		if (map[last_char++] == '\n')
+		if (map[last_char++] == '\n' || len > comp->map_size[0])
 		{
+			len = 0;
 			if (!(map[last_char - 2] == '1' && map[last_char] == '1'))
 				clean_exit("Wall has hol in vertical sides :(", map);
 		}
+		len++;
 	}
-	i = last_char - iter;
-	while (map[i])
-		if (map[i++] != '1')
+	len = last_char - iter;
+	while (map[len])
+		if (map[len++] != '1')
 			clean_exit("Wall has hol or (\\n) in the end :(", map);
 }
 
@@ -93,7 +95,7 @@ void	checks_and_start(char *map)
 	analize_map(&components, map);
 	if (components.map_size[0] < 3)
 		clean_exit("At lest need 3 colume :(", map);
-	check_wall(map);
+	check_wall(map, &components);
 	check_component(&components, map);
 	main_game(&components, map);
 	free(map);
